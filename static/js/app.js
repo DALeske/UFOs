@@ -54,47 +54,21 @@ function updateFilters() {
   
     // 8. Set the filtered data to the tableData.
     let filteredData = tableData;
+    function loopFilter(row) {
+      return row[key] == value;
+    }
   
     // 9. Loop through all of the filters and keep any data that
     // matches the filter values
 
-    let date = d3.select("#datetime").property("value");
-    let city = d3.select("#city").property("value");
-    let state = d3.select("#state").property("value");
-    let country = d3.select("#country").property("value");
-    let shape = d3.select("#shape").property("value");
-  
-    if (date) {
-      filteredData = filteredData.filter(row => row.datetime === date);
-    };
-    if (city) {
-      filteredData = filteredData.filter(row => row.city === city);
-    };
-    if (state) {
-      filteredData = filteredData.filter(row => row.state === state);
-    };
-    if (country) {
-      filteredData = filteredData.filter(row => row.country === country);
-    };
-    if (shape) {
-      filteredData = filteredData.filter(row => row.shape === shape);
-    };
-    console.log(filters);
+    for (key in filters) {
+      var value = filters[key];
+      filteredData = filteredData.filter(loopFilter);
+    }
  
-    // Try looping
- 
-    // data.forEach(function(weatherReport) {
-    //   console.log(weatherReport);
-    //   let row = tbody.append("tr");
-    //   Object.entries(weatherReport).forEach(function([key, value]) {
-    //     console.log(key, value);
-    //     });
-    //   });
-
-
     // 10. Finally, rebuild the table using the filtered data
     buildTable(filteredData);
-  
+   
   }
   
   // 2. Attach an event to listen for changes to each filter
@@ -102,4 +76,5 @@ function updateFilters() {
   
   // Build the table when the page loads
   buildTable(tableData);
+ 
 
