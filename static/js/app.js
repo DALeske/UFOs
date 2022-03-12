@@ -49,8 +49,6 @@ function updateFilters() {
     filterTable(filters);
 }
   
-
-
   // 7. Use this function to filter the table when data is entered.
   function filterTable(filters) {
   
@@ -60,42 +58,43 @@ function updateFilters() {
     // 9. Loop through all of the filters and keep any data that
     // matches the filter values
 
-    console.log(Object.keys(filters).length);
+    let date = d3.select("#datetime").property("value");
+    let city = d3.select("#city").property("value");
+    let state = d3.select("#state").property("value");
+    let country = d3.select("#country").property("value");
+    let shape = d3.select("#shape").property("value");
+  
+    if (date) {
+      filteredData = filteredData.filter(row => row.datetime === date);
+    };
+    if (city) {
+      filteredData = filteredData.filter(row => row.city === city);
+    };
+    if (state) {
+      filteredData = filteredData.filter(row => row.state === state);
+    };
+    if (country) {
+      filteredData = filteredData.filter(row => row.country === country);
+    };
+    if (shape) {
+      filteredData = filteredData.filter(row => row.shape === shape);
+    };
     console.log(filters);
-    console.log(Object.keys(filters));
-    console.log(Object.values(filters));
+ 
+    // Try looping
+ 
+    // data.forEach(function(weatherReport) {
+    //   console.log(weatherReport);
+    //   let row = tbody.append("tr");
+    //   Object.entries(weatherReport).forEach(function([key, value]) {
+    //     console.log(key, value);
+    //     });
+    //   });
 
-     
-    // for (var i=0;i<(Object.keys(filters).length);i++) {
-    //   filteredData = filteredData.filter(row.(Object.keys(filters))===Object.values(filters))
-    //   }   
 
-      let date = d3.select("#datetime").property("value");
-      let city = d3.select("#city").property("value");
-      let state = d3.select("#state").property("value");
-      let country = d3.select("#country").property("value");
-      let shape = d3.select("#shape").property("value");
-    
-       // Check to see if a date was entered and filter the
-      // data using that date.
-      if (date) {
-        filteredData = filteredData.filter(row => row.datetime === date);
-      };
-      if (city) {
-        filteredData = filteredData.filter(row => row.city === city);
-      };
-      if (state) {
-        filteredData = filteredData.filter(row => row.state === state);
-      };
-      if (country) {
-        filteredData = filteredData.filter(row => row.country === country);
-      };
-      if (shape) {
-        filteredData = filteredData.filter(row => row.shape === shape);
-      };
-    
     // 10. Finally, rebuild the table using the filtered data
     buildTable(filteredData);
+  
   }
   
   // 2. Attach an event to listen for changes to each filter
@@ -103,3 +102,4 @@ function updateFilters() {
   
   // Build the table when the page loads
   buildTable(tableData);
+
