@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Specific Files
+index_1.html
+app_1.js
+
 # C extensions
 *.so
 
